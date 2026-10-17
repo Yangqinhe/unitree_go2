@@ -1,0 +1,26 @@
+# ROS 2 / colcon generated output
+build/
+install/
+log/
+
+# Python caches and environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Machine-local editor and agent settings
+/.vscode/
+/.agents/
+
+# Local secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# OS files
+.DS_Store
+Thumbs.db

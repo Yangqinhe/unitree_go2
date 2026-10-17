@@ -1,0 +1,63 @@
+go2_local_costmap:
+  ros__parameters:
+    # Use /utlidar/cloud_base for the topics currently visible on Go2.
+    # For D435i, change this to /camera/camera/depth/color/points or the
+    # actual point cloud topic printed by `ros2 topic list`.
+    cloud_topic: /utlidar/cloud_base
+    target_frame: base_link
+    costmap_topic: /go2/local_costmap
+    summary_topic: /go2/obstacle_summary
+
+    resolution: 0.05
+    forward_range: 4.5
+    backward_range: 1.5
+    left_range: 3.0
+    right_range: 3.0
+
+    # Keep obstacle points around Go2 body height. Tune after checking TF.
+    min_z: -0.15
+    max_z: 1.20
+    min_range: 0.15
+    max_points: 80000
+
+    inflation_radius: 0.35
+    occupied_value: 100
+    inflated_value: 60
+
+    # Simple sector summary for first-stage obstacle avoidance.
+    front_half_width: 0.35
+    side_inner_y: 0.20
+    side_outer_y: 0.85
+    sector_min_x: 0.20
+    sector_max_x: 1.40
+    hard_stop_distance: 0.45
+    slow_down_distance: 1.00
+
+
+    cloud_timeout: 0.5
+    publish_empty_on_timeout: true
+    allow_untransformed_cloud: true
+
+go2_target_tracker:
+  ros__parameters:
+    detection_topic: /go2/detected_person_point
+    target_topic: /go2/follow_target
+    state_topic: /go2/follow_target_state
+    target_frame: base_link
+    alpha: 0.35
+    max_jump_distance: 1.0
+    target_timeout: 0.8
+    search_timeout: 2.0
+    min_x: 0.25
+    max_x: 5.0
+    max_abs_y: 2.5
+    publish_rate: 20.0
+    allow_untransformed_detection: true
+
+go2_obstacle_marker:
+  ros__parameters:
+    summary_topic: /go2/obstacle_summary
+    marker_topic: /go2/obstacle_markers
+    frame_id: base_link
+    hard_stop_distance: 0.45
+    slow_down_distance: 1.00

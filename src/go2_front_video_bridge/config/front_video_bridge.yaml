@@ -1,0 +1,26 @@
+go2_front_video_bridge:
+  ros__parameters:
+    input_topic: /frontvideostream
+    image_topic: /go2/front_camera/image_raw
+    compressed_topic: /go2/front_camera/image_compressed
+    camera_info_topic: /go2/front_camera/camera_info
+    frame_id: go2_front_camera
+
+    # Choose one of: video720p, video360p, video180p.
+    stream_field: video720p
+
+    # The bridge always republishes a sensor_msgs/CompressedImage.
+    # It also tries to decode JPEG frames into sensor_msgs/Image for RViz2.
+    compressed_format: jpeg
+    publish_raw_image: true
+    publish_camera_info: true
+    warn_every_n_failures: 60
+
+    # Approximate sizes used for CameraInfo only. The decoded image dimensions
+    # are taken from the actual frame.
+    width_720p: 1280
+    height_720p: 720
+    width_360p: 640
+    height_360p: 360
+    width_180p: 320
+    height_180p: 180
